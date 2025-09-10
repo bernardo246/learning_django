@@ -1,0 +1,19 @@
+{%extends "learning_log/base.html"%}
+{%block content%}
+
+<h2>Topico: {{topic}}</h2> <!-- o topico dentro das {} esta se referindo a variavel topic dentro de views.py(topico) -->
+<p>Entradas:</p>
+<p><a href="{% url 'new_entry' topic.id %}">add nova anotação</a></p><!-- o topic.id dentro das {} esta se referindo a variavel topic dentro de views.py(topico) -->
+<ul>
+    {%for i in entries %}
+    <li>
+        <p>{{ i.date_added|date:"m d, Y H:i" }}</p>
+        <p>{{i.text | linebreaks }}</p>
+        <p><a href="{% url 'edit_entry' i.id %}", class="button">edit</a></p><!-- o i.id dentro das {} esta se referindo a variavel i dentro do for loop que percorre entries, que é a lista de entradas associadas ao topico -->
+    </li>
+    {%empty%}
+    <li>no entries</li>
+    {%endfor%}
+
+</ul>
+{%endblock content%}

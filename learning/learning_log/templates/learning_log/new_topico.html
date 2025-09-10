@@ -1,0 +1,9 @@
+{%extends "learning_log/base.html" %}
+{% block content %}
+  <h1>Adicione um novo tópico</h1>
+    <form action="{% url 'new_topic' %}" method="post"> <!-- o atributo action define para onde os dados do formulário serão enviados  e o metodo pode ser declarado -->
+        {% csrf_token %}<!-- token de segurança para proteger contra ataques CSRF -->
+        {{ form.as_p }}<!-- renderiza o formulário como parágrafos HTML -->
+        <button name="submit">Salvar</button>
+    </form>
+{% endblock content %}

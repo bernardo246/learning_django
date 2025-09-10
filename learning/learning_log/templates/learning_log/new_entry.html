@@ -1,0 +1,9 @@
+{%extends "learning_log/base.html"%}
+{%block content%}
+<h1><a href="{% url 'topicos' topicos.id %}">{{ topicos }}</a></h1>
+<h2>Adicione uma nova entrada para o tópico: </h2>
+<form method="post", action="{% url 'new_entry' topicos.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Adicione a entrada</button>
+{%endblock content%}
