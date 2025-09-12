@@ -1,4 +1,4 @@
-{%{% extends "learning_log/base.html" %}%}
+{% extends "learning_log/base.html" %}<!--user L0gMyApp!92-->
 {% block content %}
 
 {% if form.errors %}<!--se houver erros no formulário, exibe uma mensagem de erro-->
@@ -9,7 +9,7 @@
         {%csrf_token%}
         {{form.as_p}}
         <button type="submit">Login</button>
-        <input type="hidden" name="next" value="{{ %urls 'index'% }}"/> <!--mantém o usuário na página que ele estava tentando acessar antes de ser redirecionado para a página de login-->
+        <input type="hidden" name="next" value="{% url 'index' %}"/> <!--mantém o usuário na página que ele estava tentando acessar antes de ser redirecionado para a página de login-->
         <!--o campo next é um campo oculto que armazena a URL da página que o usuário estava tentando acessar antes de ser redirecionado para a página de login-->
     </form>
 
