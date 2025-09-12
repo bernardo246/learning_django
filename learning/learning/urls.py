@@ -20,4 +20,5 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('learning_log.urls')),#joga para o arquivo urls.py do app learning_log
+    path('users/',include('users.urls')), #joga para o arquivo urls.py do app users
 ]
