@@ -1,0 +1,16 @@
+{% extends "learning_log/base.html" %}<!--user L0gMyApp!92-->
+{% block content %}
+
+{% if form.errors %}<!--se houver erros no formulário, exibe uma mensagem de erro-->
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+    <form method="post" action="{% url 'register' %}"><!--envia o formulário para a URL de login-->
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">registrar</button>
+        <input type="hidden" name="next" value="{% url 'index' %}"/> <!--mantém o usuário na página que ele estava tentando acessar antes de ser redirecionado para a página de login-->
+        <!--o campo next é um campo oculto que armazena a URL da página que o usuário estava tentando acessar antes de ser redirecionado para a página de login-->
+    </form>
+
+{% endblock content %}

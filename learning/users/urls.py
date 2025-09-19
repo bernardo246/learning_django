@@ -8,4 +8,5 @@ urlpatterns = [
     #página de logout(auth_views.LogoutView.as_view()serve para fazer o logout)
     #path('logout',auth_views.LogoutView.as_view(template_name='users/login.html'),name='logout'),
     path('logout',views.logout_view,name='logout'),
+    path('register',views.register,name='register'),
 ]
