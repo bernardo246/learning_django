@@ -3,6 +3,7 @@ from .models import Topic, Entry  # importar o model Topic para usar na view top
 from .forms import TopicForm, EntryForm  # importar o formulário TopicForm para usar na view new_topic
 from django.http import HttpResponseRedirect# importa HttpResponseRedirect para redirecionar após o formulário ser salvo
 from django.urls import reverse# importa o reverse para usar na view new_topic
+from django.contrib.auth.decorators import login_required# importa o decorator login_required para proteger as views que precisam de login
 
 # Create your views here.
 def index(request):
@@ -11,7 +12,7 @@ def index(request):
     # (a função render recebe 3 parâmetros: request, nome do arquivo html, dicionário com dados para passar para o html)
     return render(request, 'learning_log/index.html')
 
-
+@login_required
 def topics(request):
     """Mostra todos os tópicos."""
     topic = Topic.objects.order_by('date_added')  # pega todos os tópicos do banco de dados e ordena pela data de adição
@@ -19,7 +20,7 @@ def topics(request):
     # renderiza o arquivo topics.html e passa o dicionário context para o html
     return render(request, 'learning_log/topics.html', context)
 
-
+@login_required
 def topicos(request, topico_id):
     """"Mostra um assunto e todas as entradas associadas a ele"""
     topic = Topic.objects.get(id=topico_id)  # pega o tópico com o id igual ao topico_id passado na url
@@ -29,7 +30,7 @@ def topicos(request, topico_id):
     context = {'topic': topic, 'entries': entries}  # cria um dicionário com o tópico e as entradas
     # renderiza o arquivo topico.html e passa o dicionário context para o html
     return render(request, 'learning_log/topico.html', context)
-
+@login_required
 def new_topic(request):
     """Adiciona um novo tópico"""
     if request.method != 'POST':
@@ -46,7 +47,7 @@ def new_topic(request):
     context = {'form': form}# cria um dicionário com o formulário
     return render(request, 'learning_log/new_topico.html', context)# renderiza o arquivo new_topic.html e passa o dicionário context para o html
 
-
+@login_required
 def new_entry(request, topic_id):
     """Adiciona uma nova entrada para um assunto em particular."""
     topic = Topic.objects.get(id=topic_id)  # pega o tópico com o id == topic_id passado na url
@@ -62,7 +63,7 @@ def new_entry(request, topic_id):
 
     context = {'topicos': topic, 'form': form}  # cria um dicionário com o tópico e o formulário
     return render(request, 'learning_log/new_entry.html', context)
-
+@login_required
 def edit_entry(request, entry_id):
     """edita uma entrada existente"""
     entry=Entry.objects.get(id=entry_id)
