@@ -1,4 +1,3 @@
-from hmac import new
 from django.shortcuts import render
 from .models import Topic, Entry  # importar o model Topic para usar na view topics
 from .forms import TopicForm, EntryForm  # importar o formulário TopicForm para usar na view new_topic
